@@ -10,108 +10,108 @@ using eClinic;
 
 namespace eClinic.Controllers
 {
-    public class ContactsController : Controller
+    public class DiseasesController : Controller
     {
         private Clinic_DBEntities db = new Clinic_DBEntities();
 
-        // GET: Contacts
+        // GET: Diseases
         public ActionResult Index()
         {
-            return View(db.Contacts.ToList());
+            return View(db.Diseases.ToList());
         }
 
-        // GET: Contacts/Details/5
+        // GET: Diseases/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
+            Disease disease = db.Diseases.Find(id);
+            if (disease == null)
             {
                 return HttpNotFound();
             }
-            return View(contact);
+            return View(disease);
         }
 
-        // GET: Contacts/Create
+        // GET: Diseases/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Contacts/Create
+        // POST: Diseases/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,GUID,Name,Gender,Age,CNIC,Phone,Mobile,Address,Email")] Contact contact)
+        public ActionResult Create([Bind(Include = "Id,GUID,Name,Type,Description,IsActive,Cost")] Disease disease)
         {
             if (ModelState.IsValid)
             {
-                contact.GUID = Guid.NewGuid();
-                db.Contacts.Add(contact);
+                disease.GUID = Guid.NewGuid();
+                db.Diseases.Add(disease);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(contact);
+            return View(disease);
         }
 
-        // GET: Contacts/Edit/5
+        // GET: Diseases/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
+            Disease disease = db.Diseases.Find(id);
+            if (disease == null)
             {
                 return HttpNotFound();
             }
-            return View(contact);
+            return View(disease);
         }
 
-        // POST: Contacts/Edit/5
+        // POST: Diseases/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,GUID,Name,Gender,Age,CNIC,Phone,Mobile,Address,Email")] Contact contact)
+        public ActionResult Edit([Bind(Include = "Id,GUID,Name,Type,Description,IsActive,Cost")] Disease disease)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(contact).State = EntityState.Modified;
+                db.Entry(disease).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(contact);
+            return View(disease);
         }
 
-        // GET: Contacts/Delete/5
+        // GET: Diseases/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
+            Disease disease = db.Diseases.Find(id);
+            if (disease == null)
             {
                 return HttpNotFound();
             }
-            return View(contact);
+            return View(disease);
         }
 
-        // POST: Contacts/Delete/5
+        // POST: Diseases/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Contact contact = db.Contacts.Find(id);
-            db.Contacts.Remove(contact);
+            Disease disease = db.Diseases.Find(id);
+            db.Diseases.Remove(disease);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

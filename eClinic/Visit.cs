@@ -11,18 +11,26 @@ namespace eClinic
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Visit
     {
         public int Id { get; set; }
         public Nullable<System.Guid> GUID { get; set; }
+        [Required]
         public string Complaint { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
+        [Display(Name ="Next Visit")]
         public Nullable<System.DateTime> DateNextVisit { get; set; }
+        [Display(Name = "Drugs History")]
         public string DrugsHistory { get; set; }
+        [Display(Name = "Treatment Advice")]
         public string TreatmentAdvice { get; set; }
+        [Display(Name = "Other Information")]
         public string OtherInformation { get; set; }
         public string Comments { get; set; }
+        [Required]
+        [Display(Name = "Patient Name")]
         public Nullable<int> ContactId { get; set; }
     }
 }

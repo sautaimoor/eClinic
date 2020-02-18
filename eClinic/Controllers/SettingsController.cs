@@ -10,108 +10,107 @@ using eClinic;
 
 namespace eClinic.Controllers
 {
-    public class ContactsController : Controller
+    public class SettingsController : Controller
     {
         private Clinic_DBEntities db = new Clinic_DBEntities();
 
-        // GET: Contacts
+        // GET: Settings
         public ActionResult Index()
         {
-            return View(db.Contacts.ToList());
+            return View(db.Settings.ToList());
         }
 
-        // GET: Contacts/Details/5
+        // GET: Settings/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
+            Setting setting = db.Settings.Find(id);
+            if (setting == null)
             {
                 return HttpNotFound();
             }
-            return View(contact);
+            return View(setting);
         }
 
-        // GET: Contacts/Create
+        // GET: Settings/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Contacts/Create
+        // POST: Settings/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,GUID,Name,Gender,Age,CNIC,Phone,Mobile,Address,Email")] Contact contact)
+        public ActionResult Create([Bind(Include = "Id,Name,Data,DataVal")] Setting setting)
         {
             if (ModelState.IsValid)
             {
-                contact.GUID = Guid.NewGuid();
-                db.Contacts.Add(contact);
+                db.Settings.Add(setting);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(contact);
+            return View(setting);
         }
 
-        // GET: Contacts/Edit/5
+        // GET: Settings/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
+            Setting setting = db.Settings.Find(id);
+            if (setting == null)
             {
                 return HttpNotFound();
             }
-            return View(contact);
+            return View(setting);
         }
 
-        // POST: Contacts/Edit/5
+        // POST: Settings/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,GUID,Name,Gender,Age,CNIC,Phone,Mobile,Address,Email")] Contact contact)
+        public ActionResult Edit([Bind(Include = "Id,Name,Data,DataVal")] Setting setting)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(contact).State = EntityState.Modified;
+                db.Entry(setting).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(contact);
+            return View(setting);
         }
 
-        // GET: Contacts/Delete/5
+        // GET: Settings/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
+            Setting setting = db.Settings.Find(id);
+            if (setting == null)
             {
                 return HttpNotFound();
             }
-            return View(contact);
+            return View(setting);
         }
 
-        // POST: Contacts/Delete/5
+        // POST: Settings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Contact contact = db.Contacts.Find(id);
-            db.Contacts.Remove(contact);
+            Setting setting = db.Settings.Find(id);
+            db.Settings.Remove(setting);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

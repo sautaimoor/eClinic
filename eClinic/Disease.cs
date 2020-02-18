@@ -11,10 +11,12 @@ namespace eClinic
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Disease
     {
         public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Nullable<System.Guid> GUID { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
